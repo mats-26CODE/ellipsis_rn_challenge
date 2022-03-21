@@ -8,8 +8,9 @@ import { Ionicons } from "@expo/vector-icons";
 //-> asset import
 import bottle from "../../../assets/images/bottle.png";
 
-const ItemScreen = ({ itemDetails }) => {
-  console.log('my item details', itemDetails);
+const ItemScreen = ({ route }) => {
+  const { itemDetails } = route.params;
+
   return (
     <LinearGradient
       colors={["#fbfaff", "#e6e1f7"]}
@@ -20,20 +21,16 @@ const ItemScreen = ({ itemDetails }) => {
       </View>
       <View style={styles.itemDetailsBox}>
         <View>
-          <Text style={styles.itemNameText}>Product One</Text>
+          <Text style={styles.itemNameText}>{itemDetails.name}</Text>
         </View>
         <View>
           <Text style={styles.itemDetailText}>
-            Lorem ipsum et al to ipsum dolor sit amet dolor sit ame dolor sit
-            ame dolor sit ame to ipsum dolor sit amet dolor sit ame dolor sit
-            ame dolor sit ame dolor sit ame to ipsum dolor sit amet dolor sit
-            ame dolor sit ame dolor sit ame sit ame to ipsum dolor sit amet
-            dolor sit ame dolor sit ame dolor sit ame
+            {itemDetails.detail}
           </Text>
         </View>
         <View style={styles.itemPriceCartBox}>
           <View>
-            <Text style={styles.itemPriceText}>$99</Text>
+            <Text style={styles.itemPriceText}>${itemDetails.price}</Text>
           </View>
           <TouchableOpacity style={styles.itemCartBox}>
             <Ionicons name="ios-cart-outline" size={24} color="#b6aaec" />

@@ -23,7 +23,10 @@ const ItemCard = ({ item }) => {
     <TouchableOpacity
       style={styles.itemBox}
       onPress={() =>
-        navigation.navigate("Home", { screen: "ItemScreen", itemDetails: item })
+        navigation.navigate("Home", {
+          screen: "ItemScreen",
+          params: { itemDetails: item },
+        })
       }
     >
       <View style={styles.itemImageBox}>
