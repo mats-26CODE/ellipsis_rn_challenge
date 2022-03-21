@@ -34,7 +34,7 @@ const Signin = ({ navigation }) => {
         <View style={styles.inputBox}>
           <Text style={styles.authHeadingText}>Login</Text>
           <Input
-            placeholder={"Email"}
+            placeholder={"Username"}
             keyboardType={"email-address"}
             value={email}
             onChangeText={setEmail}

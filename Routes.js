@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useDispatch } from "react-redux";
+import { fetchItem } from "./src/actions/fetchItem";
 
 //-> icon imports
 import { Ionicons, AntDesign } from "@expo/vector-icons";
@@ -13,6 +15,7 @@ import CartScreen from "./src/components/cart/CartScreen";
 import SettingScreen from "./src/components/settings/SettingsScreen";
 import Signin from "./src/components/auth/Signin";
 import Signup from "./src/components/auth/Signup";
+
 
 //-> Authentication Screen Stack Navigation
 const AuthStack = createNativeStackNavigator();
@@ -84,9 +87,9 @@ const AppSpace = () => {
           if (route.name === "Home") {
             iconName = focused ? "home" : "home";
           } else if (route.name === "Cart") {
-            iconName = focused ? "search1" : "search1";
+            iconName = focused ? "shoppingcart" : "shoppingcart";
           } else if (route.name === "Settings") {
-            iconName = focused ? "user" : "user";
+            iconName = focused ? "setting" : "setting";
           }
 
           // You can return any component that you like here!
@@ -94,7 +97,7 @@ const AppSpace = () => {
           return <AntDesign name={iconName} size={24} color="black" />;
           // return <MaterialCommunityIcons name="account-circle" size={24} color="black" />;
         },
-        tabBarActiveTintColor: "#F0AD00",
+        tabBarActiveTintColor: "#b6aaec",
         tabBarInactiveTintColor: "gray",
         headerShown: false,
       })}
@@ -124,6 +127,12 @@ const UserStackScreen = () => {
 };
 
 const Routes = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetchItem({ dispatch });
+  }, []);
+
   return (
     <NavigationContainer>
       <UserStackScreen />
