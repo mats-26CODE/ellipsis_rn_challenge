@@ -38,13 +38,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   socialBox: {
-    width: "20%",
+    width: "18%",
     justifyContent: "center",
     alignItems: "center",
-    padding: 5,
+    padding: 4,
     marginVertical: 9,
     borderRadius: 15,
-    borderColor: "#F0AD00",
+    borderColor: "#b6aaec",
     borderWidth: 2,
   },
 });

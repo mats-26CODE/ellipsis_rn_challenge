@@ -39,7 +39,7 @@ const HomeStackScreen = () => {
       }}
     >
       <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
-      <HomeStack.Screen name="HomeScreen" component={ItemScreen} />
+      <HomeStack.Screen name="ItemScreen" component={ItemScreen} />
     </HomeStack.Navigator>
   );
 };

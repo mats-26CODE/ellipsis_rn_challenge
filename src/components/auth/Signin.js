@@ -19,6 +19,9 @@ import Button from "../common/Button";
 import SocialAuth from "../common/SocialAuth";
 
 const Signin = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <ScrollView
       contentContainerStyle={{ flexGrow: 1 }}
@@ -33,8 +36,8 @@ const Signin = ({ navigation }) => {
           <Input
             placeholder={"Email"}
             keyboardType={"email-address"}
-            // value={email}
-            // onChangeText={setEmail}
+            value={email}
+            onChangeText={setEmail}
             icon={
               <MaterialIcons name="alternate-email" size={20} color="#A5ABAF" />
             }
@@ -42,8 +45,8 @@ const Signin = ({ navigation }) => {
           <Input
             placeholder={"Password"}
             secureTextEntry={true}
-            // value={password}
-            // onChangeText={setPassword}
+            value={password}
+            onChangeText={setPassword}
             icon={
               <Ionicons name="lock-closed-outline" size={20} color="#A5ABAF" />
             }
@@ -53,7 +56,10 @@ const Signin = ({ navigation }) => {
           </TouchableWithoutFeedback>
         </View>
         <View style={styles.buttonBox}>
-          <Button text={"Login now"} />
+          <Button
+            onPress={() => navigation.navigate("AppSpace")}
+            text={"Login now"}
+          />
         </View>
         <View style={styles.socialAuthBox}>
           <View style={styles.orBox}>
@@ -118,7 +124,6 @@ const styles = StyleSheet.create({
   },
   warnText: {
     fontSize: 15,
-    fontStyle: "italic",
     color: "#3C4448",
     fontFamily: "NunitoRegular",
   },
@@ -144,9 +149,8 @@ const styles = StyleSheet.create({
   },
   registerRedirectText: {
     fontSize: 15,
-    fontStyle: "italic",
-    color: "#F0AD00",
-    fontFamily: "NunitoRegular",
+    color: "#b6aaec",
+    fontFamily: "NunitoBold",
     marginLeft: 5,
   },
 });

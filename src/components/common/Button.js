@@ -1,13 +1,20 @@
 import React from "react";
-import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Button = ({ text, onPress }) => {
   return (
-    <View>
-      <TouchableOpacity onPress={onPress} style={styles.touchButton}>
+    <TouchableOpacity onPress={onPress}>
+      <LinearGradient
+        colors={["#b6aaec", "#D1C3FE"]}
+        start={[0, 0]}
+        end={[1, 1]}
+        location={[0.25, 0.4, 1]}
+        style={styles.touchButton}
+      >
         <Text style={styles.touchButtonText}>{text}</Text>
-      </TouchableOpacity>
-    </View>
+      </LinearGradient>
+    </TouchableOpacity>
   );
 };
 
@@ -16,10 +23,7 @@ const styles = StyleSheet.create({
     padding: 15,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(240, 173, 0, 0.75)",
-    borderRadius: 50,
-    borderColor: "#F0AD00",
-    borderWidth: 1,
+    borderRadius: 20,
     width: "100%",
   },
   touchButtonText: {

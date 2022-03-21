@@ -1,15 +1,6 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Image,
-} from "react-native";
-import {
-  Ionicons,
-  MaterialIcons,
-} from "@expo/vector-icons";
+import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 //-> component imports
 import Input from "../common/Input";
@@ -19,7 +10,7 @@ import Button from "../common/Button";
 import shop from "../../../assets/images/shop.png";
 import SocialAuth from "../common/SocialAuth";
 
-const Signup = () => {
+const Signup = ({ navigation }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [initialPassword, setInitialPassword] = useState("");
@@ -79,7 +70,10 @@ const Signup = () => {
           />
         </View>
         <View style={styles.buttonBox}>
-          <Button text={"Sign up now"} />
+          <Button
+            onPress={() => navigation.navigate("AppSpace")}
+            text={"Sign up now"}
+          />
         </View>
       </View>
     </ScrollView>
