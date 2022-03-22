@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchItem } from "./src/actions/fetchItem";
+import IconBadge from "react-native-icon-badge";
+import { Text } from "react-native";
 
 //-> icon imports
-import { Ionicons, AntDesign } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 //-> component imports
 import HomeScreen from "./src/components/home/HomeScreen";
@@ -15,7 +17,7 @@ import CartScreen from "./src/components/cart/CartScreen";
 import SettingScreen from "./src/components/settings/SettingsScreen";
 import Signin from "./src/components/auth/Signin";
 import Signup from "./src/components/auth/Signup";
-
+import { selectCart } from "./src/features/cartSlice";
 
 //-> Authentication Screen Stack Navigation
 const AuthStack = createNativeStackNavigator();
@@ -78,15 +80,21 @@ const SettingsScreenStack = () => {
 //-> Our App's Material Bottom Tabs Navigation
 const Tab = createBottomTabNavigator();
 const AppSpace = () => {
+  //-> get cart items from redux
+  const cart = useSelector(selectCart);
+  const cartQuantity = cart.length;
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
+          let badge = false;
 
           if (route.name === "Home") {
             iconName = focused ? "home" : "home";
           } else if (route.name === "Cart") {
+            badge = true;
             iconName = focused ? "shoppingcart" : "shoppingcart";
           } else if (route.name === "Settings") {
             iconName = focused ? "setting" : "setting";
@@ -94,7 +102,28 @@ const AppSpace = () => {
 
           // You can return any component that you like here!
           // return <Ionicons name={iconName} size={24} color="black" />;
-          return <AntDesign name={iconName} size={24} color="black" />;
+          if (badge) {
+            return (
+              <IconBadge
+                MainElement={
+                  <AntDesign name={iconName} size={24} color={"black"} />
+                }
+                BadgeElement={
+                  <Text style={{ color: "#ffffff" }}>{cartQuantity}</Text>
+                }
+                IconBadgeStyle={{
+                  width: 20,
+                  height: 20,
+                  backgroundColor: "#b6aaec",
+                  marginRight: -15,
+                  marginTop: -5,
+                }}
+                Hidden={cartQuantity == 0}
+              />
+            );
+          } else {
+            return <AntDesign name={iconName} size={24} color="black" />;
+          }
           // return <MaterialCommunityIcons name="account-circle" size={24} color="black" />;
         },
         tabBarActiveTintColor: "#b6aaec",

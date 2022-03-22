@@ -1,21 +1,33 @@
 import React from "react";
 import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../features/cartSlice";
 
 //-> icon imports
 import { Ionicons } from "@expo/vector-icons";
 
 //-> asset import
 import bottle from "../../../assets/images/bottle.png";
+import NavigateBack from "./NavigateBack";
 
 const ItemScreen = ({ route }) => {
   const { itemDetails } = route.params;
+
+  //-> call dispatch to redux
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (itemDetails) => {
+    dispatch(addToCart(itemDetails));
+  };
 
   return (
     <LinearGradient
       colors={["#fbfaff", "#e6e1f7"]}
       style={styles.itemContainer}
     >
+      <NavigateBack />
+
       <View style={styles.itemImageBox}>
         <Image source={bottle} style={styles.itemImage} />
       </View>
@@ -24,15 +36,16 @@ const ItemScreen = ({ route }) => {
           <Text style={styles.itemNameText}>{itemDetails.name}</Text>
         </View>
         <View>
-          <Text style={styles.itemDetailText}>
-            {itemDetails.detail}
-          </Text>
+          <Text style={styles.itemDetailText}>{itemDetails.detail}</Text>
         </View>
         <View style={styles.itemPriceCartBox}>
           <View>
             <Text style={styles.itemPriceText}>${itemDetails.price}</Text>
           </View>
-          <TouchableOpacity style={styles.itemCartBox}>
+          <TouchableOpacity
+            style={styles.itemCartBox}
+            onPress={() => handleAddToCart(itemDetails)}
+          >
             <Ionicons name="ios-cart-outline" size={24} color="#b6aaec" />
           </TouchableOpacity>
         </View>
@@ -44,7 +57,7 @@ const ItemScreen = ({ route }) => {
 const styles = StyleSheet.create({
   itemContainer: {
     flex: 1,
-    paddingTop: 30,
+    paddingTop: 10,
   },
   itemImageBox: {
     flex: 3,

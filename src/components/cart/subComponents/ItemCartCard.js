@@ -10,15 +10,15 @@ import { Ionicons } from "@expo/vector-icons";
 //-> asset import
 import bottle from "../../../../assets/images/bottle.png";
 
-const ItemCard = ({ item }) => {
+const ItemCartCard = ({ item }) => {
   //-> Accessing the navigation prop
   const navigation = useNavigation();
 
   //-> call dispatch to redux
   const dispatch = useDispatch();
 
-  const handleAddToCart = (item) => {
-    dispatch(addToCart(item));
+  const handleRemoveFromCart = (item) => {
+    dispatch(removeFromCart(item));
   };
 
   return (
@@ -35,25 +35,26 @@ const ItemCard = ({ item }) => {
         {/* image */}
         <Image source={bottle} style={styles.itemImage} />
       </View>
-      <View style={styles.itemNameBox}>
-        {/* name */}
-        <Text style={styles.itemNameText}>{item.name}</Text>
-      </View>
-      <View style={styles.itemDetailBox}>
-        {/* details*/}
-        <Text style={styles.itemDetailText}>{item.detail}</Text>
-      </View>
-      <View style={styles.itemPriceCartBox}>
-        <View>
-          <Text style={styles.itemPriceText}>${item.price}</Text>
+      <View>
+        <View style={styles.itemNameBox}>
+          {/* name */}
+          <Text style={styles.itemNameText}>{item.name}</Text>
         </View>
-
-        <TouchableOpacity
-          style={styles.itemCartBox}
-          onPress={() => handleAddToCart(item)}
-        >
-          <Ionicons name="ios-cart-outline" size={24} color="#b6aaec" />
-        </TouchableOpacity>
+        <View style={styles.itemDetailBox}>
+          {/* details*/}
+          <Text style={styles.itemDetailText}>{item.detail}</Text>
+        </View>
+        <View style={styles.itemPriceCartBox}>
+          <View>
+            <Text style={styles.itemPriceText}>${item.price}</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.itemRemoveBox}
+            onPress={() => handleRemoveFromCart(item)}
+          >
+            <Text>Remove</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -61,17 +62,22 @@ const ItemCard = ({ item }) => {
 
 const styles = StyleSheet.create({
   itemBox: {
+    flex: 1,
     backgroundColor: "#f1f0f7",
     borderRadius: 10,
     marginVertical: 5,
-    marginHorizontal: 5,
-    minHeight: 204,
+    minHeight: 100,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 5,
   },
   itemImageBox: {
     alignItems: "center",
     justifyContent: "center",
     height: 140,
     padding: 5,
+    width: "20%",
   },
   itemImage: {
     width: 50,
@@ -85,6 +91,7 @@ const styles = StyleSheet.create({
     marginVertical: 2,
     padding: 5,
     height: 40,
+    width: "80%",
   },
   itemPriceCartBox: {
     paddingTop: 10,
@@ -108,15 +115,15 @@ const styles = StyleSheet.create({
     fontFamily: "NunitoBold",
     fontSize: 20,
   },
-  itemCartBox: {
+  itemRemoveBox: {
     borderColor: "#b6aaec",
     borderWidth: 1,
     borderRadius: 12,
-    paddingHorizontal: 5,
+    paddingHorizontal: 10,
     paddingVertical: 1,
     alignItems: "center",
     justifyContent: "center",
   },
 });
 
-export default ItemCard;
+export default ItemCartCard;
